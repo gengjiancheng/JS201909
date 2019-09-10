@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+            height: 50px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+
+</html>
+<script>
+    /* 
+        1.
+            基本数据类型    string  number  boolean  null  undefined
+            引用数据类型    数组  对象  Date  Math  正则  function...
+            基本数据类型是存在栈内存中；操作的是值
+            引用数据类型是存在堆内存中；操作的是地址
+        2.
+            typeOf  Object.prototype.toString.call()  constructor  instanceof
+            typeOf只能检测基本数据类型
+        3.
+            var  let  const  function  //  class  import
+        4.
+            var num = parseFloat('width:100px')
+            num ===>NaN  NaN和谁都不相等   NaN===NaN false
+            typeOf NaN ===> 'number'
+        5.
+            只弹一次 结果是9：考for 
+            break  跳出整个循环
+            continue  跳出本次循环
+        6.
+            数组的末尾添加项:  ary[ary.length]=100;  ary.push(100);  ary.splice(ary.length-1+1,0,100)
+            ary.splice(n,m,x,y,z)  从索引n开始删除m个，用x,y,z替换
+            删除数组中的最后一项 ary.pop();  ary.length--;  ary.splice(ary.length-1,1)
+        7.
+            ary.sort((a,b)=>{
+                a-b是升序
+                b-a是降序
+            )}
+            ary.sort((a,b)=>b-a)
+        8.
+            slice(n-1,m) 包含n不包含m
+            第n项的索引是n-1，第m项的索引是m-1
+        9.
+            var ary=str.split('-');
+            ary.join('/');
+            join 以指定字符拼接
+        10.
+            [n-m]之间的随机整数
+            Math.round()//四舍五入
+            Math.random()//[0-1)之间的随机数
+            Math.round(Math.random()*(m-n)+2)
+            [2-93]
+            Math.round(Math.random()*91+2)
+        11.
+            1+null+undefined+'Tencent'+false+undefined+null
+            结果是'NaNTencentfalseundefinednull'
+            Number
+            {}=>NaN
+            []=>0
+            0=>0
+            undefined=>NaN
+        12.
+            布尔类型false  0  null  ''  undefined  NaN
+        13.
+            document.getElementById('box')
+            document.getElementsByClassName('box')[0]
+            document.getElementByTageName('div')[0]
+            document.querySelector('#box')
+            document.quertSelectorAll('#box')[0]
+        14.
+            1 3 8 9 nodeType
+            元素节点的 1 
+            文本节点的 3 
+            注释节点的 8 
+            根节点的 9 
+            previousSibling
+            previousElementSibling  不兼容IE6-8
+            document.body 得到body
+            document.documentElement 得到html
+            innerHTML
+            innerText
+
+            var oDiv=document.createElement('div');
+            oDiv.innerHTML = 'hello world';
+            document.body.appendChild(oDiv);
+        16.
+            []==[] false
+            ![]==[] true 空数组转成布尔是true 取反是false false==[] 0==0 true
+            ''==[] true 字符串跟引用数据类型比较的时候，我们把引用数据类型使用toString转成字符串，然后再去比较
+            1==[1] true 数字跟引用数据类型比较，我们把引用数据类型转成数字(先用toString转成字符串，然后再用Number转成数字进行比较)
+        17.
+            setTimeout  setInterval
+            clearTimeout  clearInterval
+            setTimeout+递归===>setInterval
+            
+        18.
+            假设法
+            先排序 再去值
+            Math.max(...ary)
+        19.
+            ary.concat([])
+            ary.slice()
+            使用for循环，+push
+        20.
+            || 前边成立给前边  前边不成立给后边
+            && 前边成立给后边  前边不成立给前边
+    */
+    // var str = '2019-08-19';
+    // var ary = str.split('-');
+    // console.log(ary)
+    // var str2 = ary.join('/');
+    // console.log(str2)
+
+    // box.innerHTML = `<button onclick='alert(123)'>按钮</button>`
+
+    /* 
+        任意数求和 arguments
+    */
+
+    function sum() {
+        var t = 0;
+        for (var i = 0; i < arguments.length; i++) {
+            //arguments[i] 对应的就是我们的每一个实参
+            //t += arguments[i]  不考虑不合法的数字
+            // if(typeof arguments[i]=='number'&&!isNaN(arguments[i])){
+            //     t+=arguments[i]
+            // }
+            if (!isNaN(arguments[i])) {
+                t += arguments[i] / 1
+            }
+        }
+        return t
+    }
+    sum(1, 3, NaN, 'qqq', '4')
+    console.log(sum(1, 3, NaN, 'qqq', '4'))
+
+    function query(str) {
+        // 先把str按照？拆分：去后边的那一项
+        var str2 = str.split('?')[1];
+        // 把str2按照&拆分
+        var ary = str2.split('&');
+        // 把ary中的每一项都用=拆分，前项作为属性名，后项作为属性值
+        var obj = {};
+        ary.forEach((v, i) => {
+            // v 就是数组中的每一项
+            var arr = v.split('=');
+            obj[arr[0]] = arr[1];
+        })
+        return obj;
+    }
+
+    function fn() {
+        var str = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789';
+        var s = ''; // 要去拼接的字符串
+        while (s.length < 4) {
+            var n = Math.round(Math.random() * 61);
+            if (s.indexOf(str[n]) == -1) {
+                s += str[n];
+            }
+        }
+        for (var i = 0; i < 4;) {
+            var n = Math.round(Math.random() * 61);
+            if (s.indexOf(str[n]) == -1) {
+                s += str[n];
+                i++;
+            }
+        }
+        return s;
+    }
+
+    var oLis = document.getElementsByTagName('li');
+    var col = '';
+    for (var i = 0; i < oLis.length; i++) {
+        oLis[i].index = i;
+        oLis[i].style.background = i % 2 ? 'red' : 'blue'
+
+        oLis[i].onmouseenter = function () {
+            col = this.style.background;
+            this.style.background = 'gold';
+        }
+        oLis[i].onmouseleave = function () {
+            this.style.background = col;
+        }
+        oLis[i].onclick = function () {
+            alert(`这是第${this.index+1}行,这是${col}` )
+        }
+    }
+
+    function getInterval() {
+        console.log(123);
+        var timer = setTimeout(() => {
+            getInterval()
+        }, 1000)
+        return timer
+    }
+    getInterval()
+</script>

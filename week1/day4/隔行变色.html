@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+
+</html>
+<script>
+    var olis = document.getElementsByTagName('li');
+    for (var i = 0; i < olis.length; i++) {
+        var col = '';
+        olis[i].index = i;
+        olis[i].style.background = i % 2 ? 'blue' : 'red';
+        olis[i].onmouseenter = function () {
+            col = this.style.background;
+            this.style.background = 'gold';
+        };
+        olis[i].onmouseleave = function () {
+            this.style.background = col;
+        };
+        olis[i].onclick = function () {
+            alert(`这是第${this.index+1}行,它的颜色是${col}`)
+        }
+    }
+</script>
